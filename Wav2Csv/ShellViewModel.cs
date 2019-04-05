@@ -19,7 +19,7 @@ namespace Wav2Csv
     {
         public ShellViewModel(IConverter converter)
         {
-            this.BrowseCommand.Subscribe(async () =>
+            this.BrowseCommand.Subscribe(() =>
             {
                 var dialog = new Microsoft.Win32.OpenFileDialog()
                 {
@@ -34,6 +34,7 @@ namespace Wav2Csv
 
             this.Progress = Observable.FromEventPattern<ProgressEventArgs>(h => converter.ProgressChanged += h, h => converter.ProgressChanged -= h)
                 .Select(x => x.EventArgs.Progress)
+                .DistinctUntilChanged()
                 .ObserveOnUIDispatcher()
                 .ToReadOnlyReactivePropertySlim();
 
@@ -45,15 +46,15 @@ namespace Wav2Csv
             .CombineLatestValuesAreAllTrue()
             .ObserveOnUIDispatcher()
             .ToAsyncReactiveCommand()
-            .WithSubscribe(async () =>
+            .WithSubscribe(() =>
             {
                 converter.BeginConversion(this.SourceFilePath.Value);
             });
         }
 
         public ReactivePropertySlim<string> SourceFilePath { get; } = new ReactivePropertySlim<string>();
-        public AsyncReactiveCommand BrowseCommand { get; } = new AsyncReactiveCommand();
+        public ReactiveCommand BrowseCommand { get; } = new ReactiveCommand();
         public ReadOnlyReactivePropertySlim<int> Progress { get; }
-        public AsyncReactiveCommand ConvertCommand { get; } = new AsyncReactiveCommand();
+        public ReactiveCommand ConvertCommand { get; } = new ReactiveCommand();
     }
 }

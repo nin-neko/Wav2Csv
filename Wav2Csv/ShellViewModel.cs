@@ -45,7 +45,7 @@ namespace Wav2Csv
             }
             .CombineLatestValuesAreAllTrue()
             .ObserveOnUIDispatcher()
-            .ToAsyncReactiveCommand()
+            .ToReactiveCommand()
             .WithSubscribe(() =>
             {
                 converter.BeginConversion(this.SourceFilePath.Value);

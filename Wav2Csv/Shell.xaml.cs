@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Wav2Csv
 {
@@ -23,6 +24,20 @@ namespace Wav2Csv
         public Shell()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var hyperlink = (Hyperlink)sender;
+            var psi = new ProcessStartInfo
+            {
+                FileName = "cmd",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                Arguments = $"/c start {hyperlink.NavigateUri}"
+            };
+            Process.Start(psi);
         }
     }
 }

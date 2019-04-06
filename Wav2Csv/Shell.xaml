@@ -42,13 +42,39 @@
             
         </StackPanel>
 
-        <Button
-            Grid.Row="1"
-            Width="100"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Command="{Binding ConvertCommand, Mode=OneTime}"
-            Content="Convert"/>
+        <DockPanel Grid.Row="1">
+            <Button
+                DockPanel.Dock="Right"
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ConvertCommand, Mode=OneTime}"
+                Content="Convert"/>
+            <TextBlock
+                VerticalAlignment="Bottom"
+                FontSize="10"
+                TextWrapping="Wrap">
+                <TextBlock.Resources>
+                    <Style TargetType="Hyperlink">
+                        <EventSetter Event="Click" Handler="Hyperlink_Click"/>
+                    </Style>
+                </TextBlock.Resources>
+                Repository:  <Hyperlink NavigateUri="https://github.com/y105109/Wav2Csv">GitHub</Hyperlink><LineBreak/>
+                Dependency:
+                <Hyperlink NavigateUri="https://github.com/JoshClose/CsvHelper">CsvHelper</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/JoshClose/CsvHelper/blob/master/LICENSE.txt"> (MS-PL &amp; Apache License 2.0)</Hyperlink><LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/naudio/NAudio">NAudio</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt"> (MS-PL)</Hyperlink><LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/runceel/ReactiveProperty">ReactiveProperty</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/runceel/ReactiveProperty/blob/master/LICENSE.txt"> (MIT)</Hyperlink><LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/PrismLibrary/Prism">Prism</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/PrismLibrary/Prism/blob/master/LICENSE"> (MIT)</Hyperlink><LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/unitycontainer/unity">Unity</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/unitycontainer/unity/blob/master/LICENSE"> (Apache License 2.0)</Hyperlink><LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/unitycontainer/commonservicelocator">CommonServiceLocator</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/unitycontainer/commonservicelocator/blob/master/LICENSE"> (MS-PL)</Hyperlink>
+            </TextBlock>
+        </DockPanel>        
     </Grid>
 </Window>

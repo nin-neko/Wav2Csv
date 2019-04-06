@@ -45,11 +45,20 @@ namespace Wav2Csv
             }
             .CombineLatestValuesAreAllTrue()
             .ObserveOnUIDispatcher()
-            .ToAsyncReactiveCommand()
+            .ToReactiveCommand()
             .WithSubscribe(() =>
             {
                 converter.BeginConversion(this.SourceFilePath.Value);
             });
+
+            Observable.FromEventPattern<FaildEventArgs>(h => converter.Failed += h, h => converter.Failed -= h)
+                .ObserveOnUIDispatcher()
+                .Subscribe(x =>
+                {
+                    var caption = "Error";
+                    var message = x.EventArgs.Exception.Message;
+                    System.Windows.MessageBox.Show(App.Current.MainWindow, message, caption);
+                });
         }
 
         public ReactivePropertySlim<string> SourceFilePath { get; } = new ReactivePropertySlim<string>();

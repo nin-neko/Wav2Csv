@@ -13,6 +13,7 @@ namespace Wav2Csv
         void BeginConversion(string sourceFilePath);
 
         event EventHandler<ProgressEventArgs> ProgressChanged;
+        event EventHandler<FaildEventArgs> Failed;
     }
 
     class ProgressEventArgs : EventArgs
@@ -23,5 +24,15 @@ namespace Wav2Csv
         }
 
         public int Progress { get; }
+    }
+
+    class FaildEventArgs : EventArgs
+    {
+        public FaildEventArgs(Exception ex)
+        {
+            this.Exception = ex;
+        }
+
+        public Exception Exception { get; }
     }
 }

@@ -62,7 +62,7 @@ namespace Wav2Csv
                                         left.Add(signals[0]);
                                         if (isStereo)
                                         {
-                                            right.Add(signals[1]);                                            
+                                            right.Add(signals[1]);
                                         }
 
                                         NotifyProgress();
@@ -104,6 +104,10 @@ namespace Wav2Csv
                                 }
                                 File.WriteAllText(csvFilePath, builder.ToString());
                             }
+                            catch (Exception ex)
+                            {
+                                this.RaiseFailed(ex);
+                            }
                             finally
                             {
                                 this.RaiseProgressChanged(100);
@@ -128,8 +132,12 @@ namespace Wav2Csv
         }
 
         public event EventHandler<ProgressEventArgs> ProgressChanged;
+        public event EventHandler<FaildEventArgs> Failed;
 
         private void RaiseProgressChanged(int progress)
             => this.ProgressChanged?.Invoke(this, new ProgressEventArgs(progress));
+
+        private void RaiseFailed(Exception ex)
+            => this.Failed?.Invoke(this, new FaildEventArgs(ex));
     }
 }

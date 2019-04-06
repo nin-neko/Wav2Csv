@@ -6,9 +6,10 @@
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="MainWindow"
-        Height="450"
-        Width="800">
+        Title="Wav2Csv"
+        Height="200"
+        Width="500"
+        ResizeMode="NoResize">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>

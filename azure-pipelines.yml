@@ -37,7 +37,8 @@ steps:
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     contents: |
-      Wav2Csv\Wav2Csv\bin\**\?(*.exe|*.dll)
+      Wav2Csv\Wav2Csv\bin\Release\netcoreapp3.0\win-x64\*.exe
+      Wav2Csv\Wav2Csv\bin\Release\netcoreapp3.0\win-x64\*.dll
     targetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1

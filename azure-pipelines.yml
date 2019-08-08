@@ -34,9 +34,10 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    sourceFolder: '$(Build.BinariesDirectory)'
-    contents: '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)'
+    contents: |
+      Wav2Csv\Wav2Csv\bin\**\?(*.exe|*.dll)
     targetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - task: PublishBuildArtifacts@1
